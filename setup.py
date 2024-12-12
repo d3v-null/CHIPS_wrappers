@@ -1,5 +1,6 @@
 import setuptools
 from setuptools import setup
+
 # from setuptools.command.build_py import build_py as _build_py
 # import os
 # from wodenpy.wodenpy_setup.git_helper import make_gitdict
@@ -42,28 +43,31 @@ from setuptools import setup
 #     _build_py.run(self)
 
 setup(
-    name = "chips_wrappers",
-    version = '1.0.0',
-    author = "Jack L. B. Line, Aman Chokshi, Jaiden Cook, Dev Null",
-    url = "https://github.com/JLBLine/CHIPS_wrappers.git",
+    name="chips_wrappers",
+    version="1.0.0",
+    author="Jack L. B. Line, Aman Chokshi, Jaiden Cook, Dev Null",
+    url="https://github.com/JLBLine/CHIPS_wrappers.git",
     python_requires=">=3.7",
-    description = 'Python wrappers to run and plot CHIPS outputs',
-    long_description = open("README.md").read(),
-    long_description_content_type = 'text/markdown',
-    classifiers = [
+    description="Python wrappers to run and plot CHIPS outputs",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    classifiers=[
         "Programming Language :: Python :: 3",
         "License ::  GNU GENERAL PUBLIC LICENSE Version 3.0",
         "Operating System :: Linux",
     ],
-    packages = ['chips_wrappers',
-                'chips_wrappers.plotting',
-    'chips_wrappers.ps_methods',
-    'chips_wrappers.run_chips',
-    'chips_wrappers.setup'],
-
-    scripts=["scripts/plotchips_all.py",
-             "scripts/chips1D_tsv.py",
-             "scripts/run_CHIPS.py",],
+    packages=[
+        "chips_wrappers",
+        "chips_wrappers.plotting",
+        "chips_wrappers.ps_methods",
+        "chips_wrappers.run_chips",
+        "chips_wrappers.setup",
+    ],
+    scripts=[
+        "scripts/plotchips_all.py",
+        "scripts/chips1D_tsv.py",
+        "scripts/run_CHIPS.py",
+    ],
     install_requires=[
         "numpy",
         "matplotlib",
