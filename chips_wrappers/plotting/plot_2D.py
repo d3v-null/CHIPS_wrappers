@@ -108,8 +108,19 @@ def plot_wedge_cut(self):
 def create_positives_cmap(args, set_under_colour=False):
     """Sets up a colourmap (cmap) with a log10 normalisation based on the input
     arguments. Optionally, sets anything under zero to a specific colour"""
-    ##Setup up a bespoke colour map
-    cmap = mpl.cm.get_cmap("Spectral_r").copy()
+    # Version-agnostic way to get colormap that works on any matplotlib version
+    try:
+        # Try the new way first (matplotlib >= 3.6)
+        import matplotlib.pyplot as plt
+        cmap = plt.get_cmap("Spectral_r").copy()
+    except AttributeError:
+        try:
+            # Try the colormaps registry (matplotlib >= 3.5)
+            import matplotlib.colormaps as cm
+            cmap = cm.get_cmap("Spectral_r").copy()
+        except (ImportError, AttributeError):
+            # Fall back to the old way (matplotlib < 3.6)
+            cmap = mpl.cm.get_cmap("Spectral_r").copy()
 
     if args.plot_type == '2D_Ratio_Diff' or args.plot_type == '2D_ratio_diff':
         upper = np.ceil(np.log10(args.max_power_r))
