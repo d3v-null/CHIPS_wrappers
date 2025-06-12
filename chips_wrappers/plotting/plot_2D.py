@@ -228,7 +228,13 @@ def plot_2D_on_ax(twoD_ps_array, extent, ax, fig, polarisation,
     ax.plot(chips_data.kper, chips_data.line_beam, color='k', linestyle='--', linewidth=1)
     ax.plot(chips_data.kper, chips_data.line_horiz, color='k', linestyle='-', linewidth=1)
 
-    do_2D_axes_labels(ax, 'Crosspower', polarisation, hide_cbar_label, hide_k_par_label, hide_k_perp_label)
+    title = 'Crosspower'
+    if args.chips_tag_label:
+        title += f'\n{args.chips_tag_label}'
+    elif args.chips_tag:
+        title += f'\n{args.chips_tag}'
+
+    do_2D_axes_labels(ax, title, polarisation, hide_cbar_label, hide_k_par_label, hide_k_perp_label)
 
 def plot_2D_on_ax_two_colour_bars(twoD_ps_array, extent, ax, fig, cax_pos,
                   cax_neg, polarisation, args, title, cmap='PurpOrang',
