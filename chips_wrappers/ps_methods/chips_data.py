@@ -356,11 +356,11 @@ class ChipsDataProducts(object):
 
         file_found = False
         # Try various running option numbers, and stop if we find valid files
-        run_opts = np.arange(0, 23)
+        run_opts = list(range(0, 23))
         if self.parser_args.bias_mode >= 0:
             run_opts = [self.parser_args.bias_mode]
         if self.parser_args.start_chan >= 0:
-            run_opts += [self.parser_args.start_chan]
+            run_opts.append(self.parser_args.start_chan)
         for run_opt in run_opts:
             kriging = run_opt
             filename = f"{self.parser_args.basedir}/crosspower_{polarisation}_{kriging}.iter.{chips_tag}.dat"
@@ -377,6 +377,7 @@ class ChipsDataProducts(object):
                 "Searched for files like :\n"
                 f"{self.parser_args.basedir}/crosspower_{polarisation}_*.iter.{chips_tag}.dat"
             )
+            sys.exit(msg)
 
         crosspower = self._open_and_reshape(filename)
         # Number of K_parra depends on shape of data, so setup the params after reading in

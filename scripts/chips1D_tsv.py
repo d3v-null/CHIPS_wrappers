@@ -37,6 +37,7 @@ eval docker run -it --rm -v "/cygnus:/cygnus" -v "${HOME}/src:${HOME}/src" -w "$
 
 from chips_wrappers.setup import make_args
 from chips_wrappers.ps_methods.chips_data import ChipsDataProducts
+import os
 import sys
 import numpy as np
 import pandas as pd
@@ -48,6 +49,7 @@ def save_1D(
     oneD_delta_measured,
     oneD_delta_2sig_noise,
     pol_ext,
+    outputdir="./",
     debug_message=None,
 ):
     """Save everything to a tsv file"""
@@ -62,7 +64,7 @@ def save_1D(
             "noise": oneD_delta_2sig_noise[notzero],
         }
     )
-    filename = f"1D_power_{pol_ext}.tsv"
+    filename = os.path.join(outputdir, f"1D_power_{pol_ext}.tsv")
     print(f"saving to {filename}")
     df.to_csv(filename, index=False, sep=chr(9), float_format="%15.3f")
     if debug_message is not None:
@@ -100,6 +102,7 @@ def do_1D_save(chips_data):
             oneD_delta_measured,
             oneD_delta_2sig_noise,
             pol_ext=pol_ext,
+            outputdir=args.outputdir,
             debug_message=chips_data.get_chips_debug_message(),
         )
 

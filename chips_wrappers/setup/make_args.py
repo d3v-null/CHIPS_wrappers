@@ -1,3 +1,4 @@
+import os
 import sys
 import argparse
 import shlex
@@ -419,6 +420,8 @@ def get_args(argv=None, include_plot=True):
     # Should it be that in the nextflow pipeline `--lowerfreq_orig` should be set?
     args.lowerfreq = args.lowerfreq_orig + args.start_chan * args.chan_width
     args.Neta = int(args.N_chan / 2)
+
+    os.makedirs(args.outputdir, exist_ok=True)
 
     return args
 
