@@ -2,7 +2,7 @@
 FROM python:3.11-slim-bookworm
 
 # Set for all apt-get install, must be at the very beginning of the Dockerfile.
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Get apt dependencies
 # - use libatlass instead of liblapack3 libblas3
@@ -19,7 +19,8 @@ RUN apt-get -y update; \
 
 ADD . /app
 WORKDIR /app
-RUN python setup.py install
+RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir .
 # stupid font cache
 RUN python -c 'import matplotlib, astropy'
 

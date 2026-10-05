@@ -400,6 +400,9 @@ def get_args(argv=None, include_plot=True):
     elif args.bias_mode == 10:
         args.N_chan = round(args.N_chan_orig / 2)
         args.start_chan = round(args.N_chan_orig / 2)
+    elif args.bias_mode == 11:
+        args.N_chan = round(args.N_chan_orig / 2)
+        args.start_chan = 0
     elif args.bias_mode == 12:
         args.N_chan = round(args.N_chan_orig / 2)
         args.start_chan = round(args.N_chan_orig / 4)
@@ -410,6 +413,10 @@ def get_args(argv=None, include_plot=True):
         raise ValueError(
             f"bias_mode {args.bias_mode} not recognised, set --N_chan and --start_chan manually"
         )
+
+    # BUG: Could this following line suggest a bug? In the nextflow pipeline,
+    # `--lowerfreq` is set, but then it is immediately overwritten here.
+    # Should it be that in the nextflow pipeline `--lowerfreq_orig` should be set?
     args.lowerfreq = args.lowerfreq_orig + args.start_chan * args.chan_width
     args.Neta = int(args.N_chan / 2)
 

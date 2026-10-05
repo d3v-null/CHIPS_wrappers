@@ -74,7 +74,6 @@ class ChipsDataProducts(object):
         )
 
         if self.parser_args.verbose:
-
             print("Cosmology being used has the following parameters:")
             print(f"\tH0 = {self.cosmology.H0:.2f}")
             print(f"\tOmega Matter = {self.cosmology.Om0:.4f}")
@@ -241,7 +240,6 @@ class ChipsDataProducts(object):
             else:
                 self.decoherence_factor = float(parser_args.density_correction)
         else:
-
             self.decoherence_factor = 1.0
 
         if parser_args.wedge_factor >= 0:
@@ -361,7 +359,7 @@ class ChipsDataProducts(object):
         run_opts = np.arange(0, 23)
         if self.parser_args.bias_mode >= 0:
             run_opts = [self.parser_args.bias_mode]
-        if self.parser_args.start_chan > 0:
+        if self.parser_args.start_chan >= 0:
             run_opts += [self.parser_args.start_chan]
         for run_opt in run_opts:
             kriging = run_opt
@@ -545,7 +543,6 @@ class ChipsDataProducts(object):
                 if np.nansum(normed_weights) == 0.0:
                     pass
                 else:
-
                     # weighted sample variance
                     oneD_power_std[k_tot_ind] = np.nansum(
                         normed_weights * (twoD_data[cut_inds] - weight_mean) ** 2
@@ -582,7 +579,6 @@ class ChipsDataProducts(object):
         self._read_in_data_and_convert(polarisation, chips_tag=chips_tag, oneD=True)
 
         if self.parser_args.ktot_bin_edges:
-
             ktot_bin_edges = np.loadtxt(self.parser_args.ktot_bin_edges)
         else:
             low_k_edge = self.parser_args.low_k_edge
