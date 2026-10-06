@@ -20,7 +20,7 @@ eval singularity exec --cleanenv --home /astro/mwaeor/dev/mplhome /pawsey/mwa/si
     --basedir "./"  \
     --chips_tag "eor0high_phase1-128T_13d68053_30l_src4k_8s_80kHz"  \
     --polarisation "both"  \
-    --lowerfreq "166995000.0" \
+    --lowerfreq_orig "166995000.0" \
     --umax "300" \
     --N_chan 384 \
     --num_k_edges "80" \

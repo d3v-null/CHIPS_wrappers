@@ -415,10 +415,15 @@ def get_args(argv=None, include_plot=True):
             f"bias_mode {args.bias_mode} not recognised, set --N_chan and --start_chan manually"
         )
 
-    # BUG: Could this following line suggest a bug? In the nextflow pipeline,
-    # `--lowerfreq` is set, but then it is immediately overwritten here.
-    # Should it be that in the nextflow pipeline `--lowerfreq_orig` should be set?
-    args.lowerfreq = args.lowerfreq_orig + args.start_chan * args.chan_width
+    derived_lowerfreq = args.lowerfreq_orig + args.start_chan * args.chan_width
+    if args.lowerfreq is not None and args.lowerfreq != derived_lowerfreq:
+        print(
+            f"WARNING: --lowerfreq={args.lowerfreq} is ignored. The lowest output channel is "
+            f"derived as lowerfreq_orig + start_chan * chan_width = {derived_lowerfreq}. "
+            "Set --lowerfreq_orig to the lowest INPUT channel instead.",
+            file=sys.stderr,
+        )
+    args.lowerfreq = derived_lowerfreq
     args.Neta = int(args.N_chan / 2)
 
     os.makedirs(args.outputdir, exist_ok=True)

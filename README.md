@@ -38,13 +38,14 @@ this example assumes:
 # export pol=... xx or yy
 export bias_mode=10
 export n_chan=192
-export lowerfreq=182515000
+# lowest INPUT channel (Hz), before bias_mode channel selection
+export lowerfreq_orig=167035000
 
 chips1D_tsv.py \
     --basedir "$PWD/"  \
     --chips_tag ${group}_${name}  \
     --polarisation $pol  \
-    --lowerfreq $lowerfreq \
+    --lowerfreq_orig $lowerfreq_orig \
     --umax 300 \
     --N_chan $n_chan \
     --ktot_bin_edges ktot_bin_edges_cmt.txt \
